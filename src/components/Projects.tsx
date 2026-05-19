@@ -13,20 +13,20 @@ function Projects({ projects }: ProjectsProps) {
   return (
     <section
       aria-labelledby="projects-title"
-      className="border-t border-slate-200 bg-white px-6 py-16"
+      className="border-y border-slate-200/80 bg-white px-5 py-18 sm:px-6 lg:px-8"
       id="projects"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-medium uppercase tracking-wide text-slate-500">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
           Projects
         </p>
         <h2
-          className="mt-2 text-3xl font-semibold text-slate-950"
+          className="mt-3 text-3xl font-bold tracking-tight text-slate-950"
           id="projects-title"
         >
           Selected work
         </h2>
-        <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600">
+        <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
           Practical software projects focused on dashboard interfaces, data-driven
           workflows, and clean front-end implementation.
         </p>

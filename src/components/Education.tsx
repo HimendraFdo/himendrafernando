@@ -13,15 +13,15 @@ function Education({ education }: EducationProps) {
   return (
     <section
       aria-labelledby="education-title"
-      className="border-t border-slate-200 px-6 py-16"
+      className="px-5 py-18 sm:px-6 lg:px-8"
       id="education"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-medium uppercase tracking-wide text-slate-500">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
           Education
         </p>
         <h2
-          className="mt-2 text-3xl font-semibold text-slate-950"
+          className="mt-3 text-3xl font-bold tracking-tight text-slate-950"
           id="education-title"
         >
           Learning background
@@ -29,7 +29,7 @@ function Education({ education }: EducationProps) {
         <div className="mt-8 space-y-5">
           {education.map((item) => (
             <article
-              className="rounded-lg border border-slate-200 bg-white p-6"
+              className="rounded-lg border border-slate-200 bg-white/90 p-6 shadow-sm shadow-slate-950/[0.03]"
               key={`${item.institution}-${item.degree}`}
             >
               <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">

@@ -10,7 +10,7 @@ import { about, contact, education, profile, projects, skills } from "./data/por
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-slate-950 antialiased">
       <Navbar profile={profile} contact={contact} />
       <main>
         <Hero profile={profile} contact={contact} />
