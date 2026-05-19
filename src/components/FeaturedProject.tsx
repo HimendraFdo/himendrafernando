@@ -140,10 +140,10 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
 
       <div className="mt-8 lg:mt-0">
         {project.image ? (
-          <div className="rounded-lg border border-slate-200 bg-slate-100 p-2">
+          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
             <img
               alt={`${project.title} dashboard screenshot`}
-              className="h-full min-h-[18rem] w-full rounded-md object-contain"
+              className="h-auto w-full object-contain"
               src={project.image}
             />
           </div>
