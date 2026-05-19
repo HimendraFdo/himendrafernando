@@ -1,3 +1,5 @@
+import personalAnalyticsDashboardImage from "../assets/personal-analytics-dashboard.png";
+
 export type Profile = {
   name: string;
   role: string;
@@ -127,6 +129,7 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/HimendraFdo/personal-analytics-dashboard",
     liveUrl: undefined,
+    image: personalAnalyticsDashboardImage,
     highlights: [
       "Implemented validated CRUD workflows using TypeScript, Zod, and Prisma to support reliable data entry and database-backed records.",
       "Created filtered history views, summary cards, and Recharts visualizations to help users review activity patterns and personal metrics.",
