@@ -33,15 +33,15 @@ function Contact({ contact, profile }: ContactProps) {
   return (
     <section
       aria-labelledby="contact-title"
-      className="border-t border-slate-200 bg-white px-6 py-16"
+      className="border-y border-slate-200/80 bg-slate-950 px-5 py-18 text-white sm:px-6 lg:px-8"
       id="contact"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-medium uppercase tracking-wide text-slate-500">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-300">
           Contact
         </p>
         <h2
-          className="mt-2 text-3xl font-semibold text-slate-950"
+          className="mt-3 text-3xl font-bold tracking-tight text-white"
           id="contact-title"
         >
           Connect
@@ -51,7 +51,7 @@ function Contact({ contact, profile }: ContactProps) {
             {links.map((link) => (
               <li key={link.label}>
                 <a
-                  className="rounded-md border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-950 hover:border-slate-400"
+                  className="inline-flex min-h-11 items-center rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-blue-300/60 hover:bg-blue-400/15 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-slate-950"
                   href={link.href}
                   rel={link.external ? "noreferrer" : undefined}
                   target={link.external ? "_blank" : undefined}
@@ -62,7 +62,7 @@ function Contact({ contact, profile }: ContactProps) {
             ))}
           </ul>
         ) : (
-          <p className="mt-6 text-sm text-slate-600">
+          <p className="mt-6 text-sm text-slate-300">
             Contact links will appear here when the portfolio data is updated.
           </p>
         )}

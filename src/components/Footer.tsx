@@ -15,16 +15,14 @@ function Footer({ profile, contact }: FooterProps) {
   )
 
   return (
-    <footer className="border-t border-slate-200 px-6 py-8">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-        <p>
-          © {year} {profile.name}
-        </p>
+    <footer className="bg-slate-950 px-5 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; {year} {profile.name}</p>
         {links.length > 0 ? (
           <nav aria-label="Footer links" className="flex flex-wrap gap-4">
             {links.map((link) => (
               <a
-                className="hover:text-slate-950"
+                className="rounded-md transition hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-4 focus:ring-offset-slate-950"
                 href={link.href}
                 key={link.label}
                 rel="noreferrer"

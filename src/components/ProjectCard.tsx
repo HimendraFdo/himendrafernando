@@ -13,11 +13,11 @@ function ProjectCard({ project }: ProjectCardProps) {
   const liveHref = isUsableHref(project.liveUrl) ? project.liveUrl : undefined
 
   return (
-    <article className="flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 sm:p-6">
+    <article className="flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm shadow-slate-950/[0.03] transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-slate-950/[0.07] sm:p-6">
       {project.image ? (
         <img
           alt={`${project.title} screenshot`}
-          className="mb-5 aspect-video w-full rounded-md border border-slate-200 object-cover"
+          className="mb-5 aspect-video w-full rounded-md border border-slate-200 bg-slate-50 object-cover"
           src={project.image}
         />
       ) : null}
@@ -34,7 +34,7 @@ function ProjectCard({ project }: ProjectCardProps) {
       </p>
       <ul className="mt-5 flex flex-wrap gap-2">
         {project.techStack.map((tech) => (
-          <li className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700" key={tech}>
+          <li className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700" key={tech}>
             {tech}
           </li>
         ))}
@@ -54,7 +54,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           {githubHref ? (
             <a
               aria-label={`View ${project.title} source code on GitHub`}
-              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-950 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2"
+              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
               href={githubHref}
               rel="noreferrer"
               target="_blank"
@@ -66,7 +66,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           {liveHref ? (
             <a
               aria-label={`Open live demo for ${project.title}`}
-              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-950 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2"
+              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
               href={liveHref}
               rel="noreferrer"
               target="_blank"
