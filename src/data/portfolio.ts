@@ -108,9 +108,9 @@ export const projects: Project[] = [
     title: "Personal Analytics Dashboard",
     slug: "personal-analytics-dashboard",
     description:
-      "An authenticated full-stack analytics web application for logging and reviewing personal metrics.",
+      "A personal analytics dashboard for tracking entries, reviewing trends, and presenting personal data clearly.",
     longDescription:
-      "Built and deployed an authenticated Next.js application with Clerk, Prisma, PostgreSQL/Neon, and Vercel for logging study, finance, health, and personal entries.",
+      "Built as a practical dashboard project to demonstrate data visualization, structured tracking workflows, and clean information display across study, finance, health, and personal entries.",
     techStack: [
       "Next.js",
       "React",
@@ -125,7 +125,7 @@ export const projects: Project[] = [
       "Vitest",
       "Vercel",
     ],
-    githubUrl: "",
+    githubUrl: "https://github.com/HimendraFdo/personal-analytics-dashboard",
     liveUrl: undefined,
     highlights: [
       "Implemented validated CRUD workflows using TypeScript, Zod, and Prisma to support reliable data entry and database-backed records.",
