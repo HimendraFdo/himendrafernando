@@ -54,23 +54,24 @@ export type Contact = {
 };
 
 export const profile: Profile = {
-  name: "YOUR_NAME",
-  role: "Software Engineering Portfolio",
-  headline: "Aspiring software engineer focused on building practical, data-informed web applications.",
-  location: "YOUR_LOCATION",
-  email: "YOUR_EMAIL",
+  name: "Himendra Fernando",
+  role: "Software Engineering Intern | Computer Science Student | Full-Stack Development",
+  headline:
+    "Computer Science student focused on full-stack development, backend systems, and data-driven web applications.",
+  location: "Hamilton, NZ",
+  email: "fernandohimendra@gmail.com",
   summary:
-    "I build clean, maintainable web applications with a focus on useful interfaces, structured data, and thoughtful problem solving. This portfolio highlights selected projects, technical skills, and learning milestones.",
-  resumeUrl: "YOUR_RESUME_URL",
+    "Computer Science student at the University of Waikato with an A+ average and hands-on full-stack development experience building React, Next.js, TypeScript, Python, Java, Prisma, and PostgreSQL applications.",
+  resumeUrl: "",
 };
 
 export const about: About = {
   intro:
-    "I am a software engineering student/developer building a portfolio around practical front-end development, data visualization, and full-stack project work. I enjoy turning ambiguous ideas into structured products that are easy to understand and extend.",
+    "I am a Computer Science student at the University of Waikato building practical full-stack applications with React, Next.js, TypeScript, Python, Java, Prisma, and PostgreSQL. I am interested in software engineering internships focused on full-stack development, backend systems, and data-driven web applications.",
   focus: [
-    "Building responsive web applications with modern JavaScript and TypeScript.",
-    "Creating dashboards and interfaces that make information easier to explore.",
-    "Writing clear, reusable code that future collaborators can work with confidently.",
+    "Building authenticated full-stack web applications with reusable React components.",
+    "Creating validated API routes, CRUD workflows, and database-backed records.",
+    "Designing dashboards, charts, and filtered views that make personal data easier to review.",
   ],
   values: [
     "Clarity in both user experience and code structure.",
@@ -82,19 +83,23 @@ export const about: About = {
 export const skills: SkillGroup[] = [
   {
     category: "Languages",
-    skills: ["TypeScript", "JavaScript", "HTML", "CSS"],
+    skills: ["Python", "Java", "TypeScript", "JavaScript", "HTML", "CSS", "SQL"],
   },
   {
     category: "Frontend",
-    skills: ["React", "Vite", "Tailwind CSS", "Responsive UI Development"],
+    skills: ["React", "Next.js", "Tailwind CSS", "Responsive Design", "Reusable Components"],
   },
   {
-    category: "Data and Visualization",
-    skills: ["Dashboard Design", "Data Visualization", "Analytics Workflows"],
+    category: "Backend and Data",
+    skills: ["Prisma", "PostgreSQL", "Neon", "API Routes", "CRUD Workflows", "Zod"],
   },
   {
-    category: "Tools and Workflow",
-    skills: ["Git", "GitHub", "npm", "Code Review"],
+    category: "Testing and Tools",
+    skills: ["Git", "Vitest", "Vercel", "Unit Testing", "Data Visualization", "Recharts"],
+  },
+  {
+    category: "Computer Science",
+    skills: ["Data Structures and Algorithms", "Object-Oriented Programming", "Software Engineering Principles"],
   },
 ];
 
@@ -103,17 +108,29 @@ export const projects: Project[] = [
     title: "Personal Analytics Dashboard",
     slug: "personal-analytics-dashboard",
     description:
-      "A personal analytics dashboard that showcases data visualization, tracking, and dashboard-building skills.",
+      "An authenticated full-stack analytics web application for logging and reviewing personal metrics.",
     longDescription:
-      "Personal Analytics Dashboard is a portfolio project designed to demonstrate how personal data can be organized, tracked, and presented through clear dashboard views. The project is intended to highlight front-end implementation, structured data handling, and practical data visualization patterns without claiming production use or external users.",
-    techStack: ["TypeScript", "React", "Vite", "Tailwind CSS"],
-    githubUrl: "YOUR_GITHUB_URL/personal-analytics-dashboard",
+      "Built and deployed an authenticated Next.js application with Clerk, Prisma, PostgreSQL/Neon, and Vercel for logging study, finance, health, and personal entries.",
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Clerk",
+      "Prisma",
+      "PostgreSQL",
+      "Neon",
+      "Zod",
+      "Recharts",
+      "Vitest",
+      "Vercel",
+    ],
+    githubUrl: "",
     liveUrl: undefined,
-    image: "/projects/personal-analytics-dashboard.png",
     highlights: [
-      "Designed to present tracked personal metrics in a clean dashboard format.",
-      "Demonstrates dashboard-building, component planning, and data display skills.",
-      "Structured as a featured portfolio project that can be expanded with real data sources later.",
+      "Implemented validated CRUD workflows using TypeScript, Zod, and Prisma to support reliable data entry and database-backed records.",
+      "Created filtered history views, summary cards, and Recharts visualizations to help users review activity patterns and personal metrics.",
+      "Developed reusable React components with Tailwind CSS and added Vitest coverage for key utility and validation logic.",
     ],
     featured: true,
   },
@@ -121,28 +138,28 @@ export const projects: Project[] = [
 
 export const education: EducationItem[] = [
   {
-    institution: "YOUR_UNIVERSITY",
-    degree: "YOUR_DEGREE",
-    location: "YOUR_UNIVERSITY_LOCATION",
-    startDate: "YOUR_START_DATE",
-    endDate: "YOUR_END_DATE",
+    institution: "The University of Waikato",
+    degree: "Bachelor of Science in Computer Science",
+    location: "Hamilton, NZ",
+    startDate: "In progress",
+    endDate: "",
     summary:
-      "Add a concise summary of your programme, relevant coursework, or academic focus here. Avoid adding grades, awards, or specific achievements until they are confirmed.",
+      "Current A+ average. Relevant coursework: Software Engineering, Artificial Intelligence, Data Structures and Algorithms, Programming in Java, and Programming in Python.",
   },
 ];
 
 export const contact: Contact = {
-  email: "YOUR_EMAIL",
+  email: "fernandohimendra@gmail.com",
   github: {
     label: "GitHub",
-    href: "YOUR_GITHUB_URL",
+    href: "https://github.com/HimendraFdo",
   },
   linkedin: {
     label: "LinkedIn",
-    href: "YOUR_LINKEDIN_URL",
+    href: "https://www.linkedin.com/in/himendra-fernando-aa2aa5313/",
   },
   resume: {
     label: "Resume",
-    href: "YOUR_RESUME_URL",
+    href: "",
   },
 };
