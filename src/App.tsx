@@ -11,8 +11,14 @@ import { about, contact, education, profile, projects, skills } from "./data/por
 function App() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-transparent text-slate-950 antialiased">
+      <a
+        className="sr-only z-50 rounded-md bg-white px-4 py-3 text-sm font-semibold text-slate-950 shadow-lg focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+        href="#main-content"
+      >
+        Skip to main content
+      </a>
       <Navbar profile={profile} contact={contact} />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero profile={profile} contact={contact} />
         <About about={about} />
         <Skills skills={skills} />

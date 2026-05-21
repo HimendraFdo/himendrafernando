@@ -22,7 +22,7 @@ function Footer({ profile, contact }: FooterProps) {
           <nav aria-label="Footer links" className="flex flex-wrap gap-4">
             {links.map((link) => (
               <a
-                className="rounded-md transition hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-4 focus:ring-offset-slate-950"
+                className="inline-flex min-h-11 items-center rounded-md transition hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-4 focus:ring-offset-slate-950"
                 href={link.href}
                 key={link.label}
                 rel="noreferrer"

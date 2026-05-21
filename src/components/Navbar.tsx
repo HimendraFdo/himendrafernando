@@ -28,7 +28,7 @@ function Navbar({ profile, contact }: NavbarProps) {
         className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"
       >
         <a
-          className="w-fit rounded-md text-base font-semibold tracking-tight text-slate-950 transition hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-4 focus:ring-offset-white"
+          className="min-h-11 w-fit max-w-full rounded-md py-2 text-base font-semibold tracking-tight text-slate-950 transition hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-4 focus:ring-offset-white"
           href="#top"
         >
           {profile.name}
@@ -36,7 +36,7 @@ function Navbar({ profile, contact }: NavbarProps) {
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm font-medium text-slate-600 sm:justify-end">
           {navItems.map((item) => (
             <a
-              className="rounded-md px-2.5 py-1.5 transition hover:bg-slate-100 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white"
+              className="inline-flex min-h-11 items-center rounded-md px-2.5 py-2 transition hover:bg-slate-100 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white"
               href={item.href}
               key={item.href}
             >
@@ -46,7 +46,7 @@ function Navbar({ profile, contact }: NavbarProps) {
           {socialLinks.map((link) => (
             <a
               aria-label={`${link.label} profile`}
-              className="rounded-md px-2.5 py-1.5 font-semibold text-blue-700 transition hover:bg-blue-50 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white"
+              className="inline-flex min-h-11 items-center rounded-md px-2.5 py-2 font-semibold text-blue-700 transition hover:bg-blue-50 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white"
               href={link.href}
               key={link.label}
               rel="noreferrer"
