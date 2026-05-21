@@ -29,3 +29,8 @@ Build for production:
 ```bash
 npm run build
 ```
+
+## Portfolio Content
+
+Portfolio text, project links, and contact placeholders are managed in `src/data/portfolio.ts`.
+Add a real resume URL before enabling the resume link.
