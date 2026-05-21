@@ -57,7 +57,7 @@ export type Contact = {
 
 export const profile: Profile = {
   name: "Himendra Fernando",
-  role: "Software Engineering Intern | Computer Science Student | Full-Stack Development",
+  role: "Computer Science Student | Full-Stack Development",
   headline:
     "Computer Science student focused on full-stack development, backend systems, and data-driven web applications.",
   location: "Hamilton, NZ",
