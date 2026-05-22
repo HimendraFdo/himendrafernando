@@ -12,7 +12,7 @@ function DashboardPlaceholder() {
   return (
     <div
       aria-label="Dashboard preview placeholder"
-      className="flex min-h-[18rem] flex-col justify-between rounded-lg border border-slate-800 bg-slate-950 p-4 text-white shadow-inner sm:min-h-[22rem] sm:p-5"
+      className="flex min-h-[18rem] flex-col justify-between rounded-lg border border-white/10 bg-slate-950 p-4 text-white shadow-inner sm:min-h-[22rem] sm:p-5"
       role="img"
     >
       <div className="flex items-center justify-between gap-4">
@@ -64,32 +64,34 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
   const liveHref = isUsableHref(project.liveUrl) ? project.liveUrl : undefined
 
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-5 shadow-xl shadow-slate-950/[0.06] ring-1 ring-slate-950/[0.02] transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-950/[0.09] sm:p-6 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+    <article className="overflow-hidden rounded-lg border border-white/10 bg-[#101620] shadow-2xl shadow-black/20 lg:grid lg:grid-cols-[0.95fr_1.05fr]">
       <div>
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">
-            Featured project
-          </span>
-          <span className="text-sm font-medium text-slate-500">Project spotlight</span>
+        <div className="border-b border-white/10 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded border border-cyan-300/30 bg-cyan-300/10 px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-cyan-200">
+              Featured project
+            </span>
+            <span className="text-sm font-medium text-slate-500">Project spotlight</span>
+          </div>
+
+          <h3 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl">
+            {project.title}
+          </h3>
+          <p className="mt-4 text-base leading-7 text-slate-300">
+            {project.description}
+          </p>
+          <p className="mt-5 text-sm leading-6 text-slate-400">
+            {project.longDescription}
+          </p>
         </div>
 
-        <h3 className="mt-5 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
-          {project.title}
-        </h3>
-        <p className="mt-3 text-base leading-7 text-slate-700">
-          {project.description}
-        </p>
-        <p className="mt-5 text-sm leading-6 text-slate-600">
-          {project.longDescription}
-        </p>
-
         {project.highlights.length > 0 ? (
-          <ul className="mt-6 space-y-3 text-sm leading-6 text-slate-700">
+          <ul className="space-y-3 p-6 text-sm leading-6 text-slate-300 sm:p-8">
             {project.highlights.map((highlight) => (
               <li className="flex gap-3" key={highlight}>
                 <span
                   aria-hidden="true"
-                  className="mt-2 size-2 shrink-0 rounded-full bg-blue-600"
+                  className="mt-2 size-2 shrink-0 rounded-full bg-cyan-300"
                 />
                 <span>{highlight}</span>
               </li>
@@ -97,10 +99,10 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
           </ul>
         ) : null}
 
-        <ul className="mt-6 flex flex-wrap gap-2" aria-label="Technology stack">
+        <ul className="flex flex-wrap gap-2 border-y border-white/10 px-6 py-5 sm:px-8" aria-label="Technology stack">
           {project.techStack.map((tech) => (
             <li
-              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700"
+              className="rounded border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300"
               key={tech}
             >
               {tech}
@@ -109,11 +111,11 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
         </ul>
 
         {(githubHref || liveHref) && (
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="flex flex-col gap-3 p-6 sm:flex-row sm:p-8">
             {githubHref ? (
               <a
                 aria-label={`View ${project.title} source code on GitHub`}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-[#101620]"
                 href={githubHref}
                 rel="noreferrer"
                 target="_blank"
@@ -125,7 +127,7 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
             {liveHref ? (
               <a
                 aria-label={`Open live demo for ${project.title}`}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/14 bg-white/6 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-cyan-200/50 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-[#101620]"
                 href={liveHref}
                 rel="noreferrer"
                 target="_blank"
@@ -138,12 +140,12 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
         )}
       </div>
 
-      <div className="mt-8 lg:mt-0">
+      <div className="bg-[#080b11] p-4 sm:p-6 lg:p-8">
         {project.image ? (
-          <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50 shadow-sm">
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-slate-950 shadow-2xl shadow-black/30">
             <img
               alt={`${project.title} dashboard screenshot`}
-              className="h-auto w-full object-contain transition duration-500 hover:scale-[1.015]"
+              className="h-full min-h-[18rem] w-full object-cover object-left-top opacity-95 transition duration-500 hover:scale-[1.015]"
               src={project.image}
             />
           </div>
