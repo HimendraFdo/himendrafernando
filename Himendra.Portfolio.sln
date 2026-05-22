@@ -1,0 +1,48 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Himendra.Portfolio.Api", "api\Himendra.Portfolio.Api\Himendra.Portfolio.Api.csproj", "{2B86C4EF-ED12-4FB9-8C85-4632826EA214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Himendra.Portfolio.Application", "api\Himendra.Portfolio.Application\Himendra.Portfolio.Application.csproj", "{45963F0E-C3F4-46E6-A1A9-14A7B1F0B15F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Himendra.Portfolio.Domain", "api\Himendra.Portfolio.Domain\Himendra.Portfolio.Domain.csproj", "{C5DE37BB-126D-47B6-A7A6-98CC665846F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Himendra.Portfolio.Infrastructure", "api\Himendra.Portfolio.Infrastructure\Himendra.Portfolio.Infrastructure.csproj", "{3D0A8C81-3A9E-4257-B057-D5CD0B55F102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Himendra.Portfolio.Tests", "api\Himendra.Portfolio.Tests\Himendra.Portfolio.Tests.csproj", "{0775D269-2424-459A-B5B8-7FC2971B41F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B86C4EF-ED12-4FB9-8C85-4632826EA214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B86C4EF-ED12-4FB9-8C85-4632826EA214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B86C4EF-ED12-4FB9-8C85-4632826EA214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B86C4EF-ED12-4FB9-8C85-4632826EA214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45963F0E-C3F4-46E6-A1A9-14A7B1F0B15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45963F0E-C3F4-46E6-A1A9-14A7B1F0B15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45963F0E-C3F4-46E6-A1A9-14A7B1F0B15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45963F0E-C3F4-46E6-A1A9-14A7B1F0B15F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DE37BB-126D-47B6-A7A6-98CC665846F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DE37BB-126D-47B6-A7A6-98CC665846F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DE37BB-126D-47B6-A7A6-98CC665846F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DE37BB-126D-47B6-A7A6-98CC665846F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0A8C81-3A9E-4257-B057-D5CD0B55F102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0A8C81-3A9E-4257-B057-D5CD0B55F102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0A8C81-3A9E-4257-B057-D5CD0B55F102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0A8C81-3A9E-4257-B057-D5CD0B55F102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0775D269-2424-459A-B5B8-7FC2971B41F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0775D269-2424-459A-B5B8-7FC2971B41F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0775D269-2424-459A-B5B8-7FC2971B41F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0775D269-2424-459A-B5B8-7FC2971B41F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17C677C0-00D2-40E4-87E4-16ED3ACC1C8D}
+	EndGlobalSection
+EndGlobal
