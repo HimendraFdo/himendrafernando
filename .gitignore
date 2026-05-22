@@ -10,10 +10,15 @@ lerna-debug.log*
 node_modules/
 dist/
 dist-ssr
+bin/
+obj/
 *.local
 .env
 .env.*
 .vite/
+.dotnet-home/
+.nuget-packages/
+.appdata/
 
 # Editor directories and files
 .vscode/*
@@ -24,4 +29,5 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
+!Himendra.Portfolio.sln
 *.sw?
