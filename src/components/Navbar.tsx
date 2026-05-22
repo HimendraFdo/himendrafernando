@@ -22,21 +22,24 @@ function Navbar({ profile, contact }: NavbarProps) {
   )
 
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/85 shadow-sm shadow-slate-950/[0.03] backdrop-blur-xl">
+    <header className="sticky top-0 z-20 border-b border-white/10 bg-[#080b11]/82 backdrop-blur-xl">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"
+        className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"
       >
         <a
-          className="min-h-11 w-fit max-w-full rounded-md py-2 text-base font-semibold tracking-tight text-slate-950 transition hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-4 focus:ring-offset-white"
+          className="group inline-flex min-h-11 w-fit max-w-full items-center gap-3 rounded-md py-2 text-base font-semibold tracking-tight text-white transition hover:text-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-4 focus:ring-offset-[#080b11]"
           href="#top"
         >
-          {profile.name}
+          <span className="grid size-8 place-items-center rounded border border-cyan-300/40 bg-cyan-300/10 text-xs font-bold text-cyan-200 transition group-hover:border-cyan-200">
+            HF
+          </span>
+          <span>{profile.name}</span>
         </a>
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm font-medium text-slate-600 sm:justify-end">
+        <div className="flex flex-wrap items-center gap-x-1 gap-y-2 text-sm font-medium text-slate-300 sm:justify-end">
           {navItems.map((item) => (
             <a
-              className="inline-flex min-h-11 items-center rounded-md px-2.5 py-2 transition hover:bg-slate-100 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white"
+              className="inline-flex min-h-11 items-center rounded-md px-3 py-2 transition hover:bg-white/8 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-[#080b11]"
               href={item.href}
               key={item.href}
             >
@@ -46,7 +49,7 @@ function Navbar({ profile, contact }: NavbarProps) {
           {socialLinks.map((link) => (
             <a
               aria-label={`${link.label} profile`}
-              className="inline-flex min-h-11 items-center rounded-md px-2.5 py-2 font-semibold text-blue-700 transition hover:bg-blue-50 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white"
+              className="inline-flex min-h-11 items-center rounded-md border border-white/12 px-3 py-2 font-semibold text-cyan-200 transition hover:border-cyan-200/50 hover:bg-cyan-200/10 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-[#080b11]"
               href={link.href}
               key={link.label}
               rel="noreferrer"

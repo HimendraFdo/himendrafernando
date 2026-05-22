@@ -11,28 +11,26 @@ function Skills({ skills }: SkillsProps) {
   return (
     <section
       aria-labelledby="skills-title"
-      className="px-5 py-18 sm:px-6 lg:px-8"
+      className="px-5 py-20 sm:px-6 lg:px-8"
       id="skills"
     >
-      <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
-          Skills
-        </p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950" id="skills-title">
+      <div className="mx-auto max-w-7xl">
+        <p className="font-mono text-sm font-semibold uppercase tracking-[0.16em] text-cyan-200/70">02 / Skills</p>
+        <h2 className="mt-4 text-4xl font-black tracking-tight text-white" id="skills-title">
           Technical toolkit
         </h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((group) => {
             const headingId = toHeadingId(group.category)
 
             return (
               <section
                 aria-labelledby={headingId}
-                className="rounded-lg border border-slate-200 bg-white/90 p-5 shadow-sm shadow-slate-950/[0.03] transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md hover:shadow-slate-950/[0.06]"
+                className="bg-[#101620]/92 p-6 transition hover:bg-[#151d2a]"
                 key={group.category}
               >
                 <h3
-                  className="text-base font-semibold text-slate-950"
+                  className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-cyan-200"
                   id={headingId}
                 >
                   {group.category}
@@ -40,7 +38,7 @@ function Skills({ skills }: SkillsProps) {
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
                     <li
-                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700"
+                      className="rounded border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-slate-200"
                       key={skill}
                     >
                       {skill}

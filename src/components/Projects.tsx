@@ -13,26 +13,28 @@ function Projects({ projects }: ProjectsProps) {
   return (
     <section
       aria-labelledby="projects-title"
-      className="border-y border-slate-200/80 bg-white px-5 py-18 sm:px-6 lg:px-8"
+      className="border-y border-white/10 bg-[#0b1018] px-5 py-20 sm:px-6 lg:px-8"
       id="projects"
     >
-      <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
-          Projects
-        </p>
-        <h2
-          className="mt-3 text-3xl font-bold tracking-tight text-slate-950"
-          id="projects-title"
-        >
-          Selected work
-        </h2>
-        <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-          Practical software projects focused on dashboard interfaces, data-driven
-          workflows, and clean front-end implementation.
-        </p>
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-6 md:grid-cols-[0.72fr_1.3fr] md:items-end">
+          <div>
+            <p className="font-mono text-sm font-semibold uppercase tracking-[0.16em] text-cyan-200/70">03 / Projects</p>
+            <h2
+              className="mt-4 text-4xl font-black tracking-tight text-white"
+              id="projects-title"
+            >
+              Selected work
+            </h2>
+          </div>
+          <p className="max-w-2xl text-base leading-7 text-slate-400">
+            Practical software projects focused on dashboard interfaces, data-driven
+            workflows, and clean front-end implementation.
+          </p>
+        </div>
 
         {featuredProject ? (
-          <div className="mt-8">
+          <div className="mt-10">
             <FeaturedProject project={featuredProject} />
           </div>
         ) : null}
