@@ -58,6 +58,10 @@ public static class WebApplicationExtensions
         .WithName("GetHealth")
         .WithOpenApi();
 
+        app.MapHealthChecks("/health/ready")
+            .WithName("GetHealthReady")
+            .WithOpenApi();
+
         return app;
     }
 

@@ -2,6 +2,8 @@ using System.Security.Claims;
 using System.Threading.RateLimiting;
 using Himendra.Portfolio.Api.Options;
 using Himendra.Portfolio.Api.Security;
+using Himendra.Portfolio.Infrastructure;
+using Himendra.Portfolio.Infrastructure.Data;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace Himendra.Portfolio.Api.Extensions;
@@ -22,6 +24,7 @@ public static class ServiceCollectionExtensions
         services.AddProblemDetails();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddInfrastructure(configuration);
 
         services.ConfigureHttpJsonOptions(options =>
         {
@@ -103,6 +106,14 @@ public static class ServiceCollectionExtensions
                     .ExecuteAsync(context.HttpContext);
             };
         });
+
+        var healthChecks = services.AddHealthChecks();
+
+        if (!string.IsNullOrWhiteSpace(
+            configuration.GetConnectionString(DependencyInjection.PortfolioDatabaseConnectionName)))
+        {
+            healthChecks.AddDbContextCheck<PortfolioDbContext>("portfolio_database");
+        }
 
         return services;
     }
