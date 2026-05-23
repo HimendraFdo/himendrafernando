@@ -12,6 +12,14 @@ dotnet run --project api/Himendra.Portfolio.Api
 
 The local launch profile uses the URLs defined in `api/Himendra.Portfolio.Api/Properties/launchSettings.json`.
 
+Run the backend verification commands from the repository root:
+
+```bash
+dotnet restore Himendra.Portfolio.sln
+dotnet build Himendra.Portfolio.sln
+dotnet test Himendra.Portfolio.sln
+```
+
 ## CORS
 
 CORS is restricted to configured frontend origins:
@@ -79,3 +87,15 @@ For privacy, the API stores a salted hash of the source IP address rather than t
 ## Configuration
 
 Use `appsettings.Development.json` or environment variables for local overrides. Do not commit production secrets. Production secrets should be supplied through environment variables or AWS Secrets Manager.
+
+Required production settings:
+
+```text
+ConnectionStrings__PortfolioDatabase
+Authentication__Authority
+Authentication__Audience
+Security__IpHashSalt
+Cors__AllowedOrigins__0
+```
+
+See `api/docs/database.md` for PostgreSQL, EF Core, and RLS setup. See `api/docs/admin-auth.md` for admin JWT authorization behavior.
