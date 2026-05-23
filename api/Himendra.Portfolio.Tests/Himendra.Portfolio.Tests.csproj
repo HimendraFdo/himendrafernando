@@ -12,6 +12,7 @@
     <ProjectReference Include="..\Himendra.Portfolio.Api\Himendra.Portfolio.Api.csproj" />
     <ProjectReference Include="..\Himendra.Portfolio.Application\Himendra.Portfolio.Application.csproj" />
     <ProjectReference Include="..\Himendra.Portfolio.Domain\Himendra.Portfolio.Domain.csproj" />
+    <ProjectReference Include="..\Himendra.Portfolio.Infrastructure\Himendra.Portfolio.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
