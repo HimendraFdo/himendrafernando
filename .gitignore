@@ -19,6 +19,7 @@ obj/
 .dotnet-home/
 .nuget-packages/
 .appdata/
+**/.terraform/
 
 # Editor directories and files
 .vscode/*
