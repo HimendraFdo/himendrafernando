@@ -1,6 +1,6 @@
 # Himendra Fernando Portfolio
 
-Portfolio website front-end built with Vite, React, TypeScript, and Tailwind CSS.
+Portfolio website front-end built with Vite, React, TypeScript, and Tailwind CSS, with an ASP.NET Core backend in `api/`.
 
 ## Tech Stack
 
@@ -28,6 +28,14 @@ Build for production:
 
 ```bash
 npm run build
+```
+
+Run backend checks:
+
+```bash
+dotnet restore Himendra.Portfolio.sln
+dotnet build Himendra.Portfolio.sln
+dotnet test Himendra.Portfolio.sln
 ```
 
 ## Portfolio Content
