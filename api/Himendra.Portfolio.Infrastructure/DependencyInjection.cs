@@ -1,5 +1,7 @@
 using Himendra.Portfolio.Application.Contact;
 using Himendra.Portfolio.Application.Security;
+using Himendra.Portfolio.Application.Admin.ContactSubmissions;
+using Himendra.Portfolio.Infrastructure.Admin.ContactSubmissions;
 using Himendra.Portfolio.Infrastructure.Contact;
 using Himendra.Portfolio.Infrastructure.Data;
 using Himendra.Portfolio.Infrastructure.Options;
@@ -36,6 +38,7 @@ public static class DependencyInjection
         services.AddDbContext<PortfolioDbContext>(options =>
             options.UseNpgsql(connectionString));
         services.AddScoped<IContactSubmissionService, ContactSubmissionService>();
+        services.AddScoped<IAdminContactSubmissionService, AdminContactSubmissionService>();
 
         return services;
     }

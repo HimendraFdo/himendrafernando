@@ -41,7 +41,9 @@ public static class WebApplicationExtensions
 
         app.UseHttpsRedirection();
         app.UseCors(ServiceCollectionExtensions.ConfiguredCorsPolicyName);
+        app.UseAuthentication();
         app.UseRateLimiter();
+        app.UseAuthorization();
 
         app.MapGet("/", () => Results.Ok(new
         {
@@ -64,6 +66,7 @@ public static class WebApplicationExtensions
             .WithOpenApi();
 
         app.MapContactEndpoints();
+        app.MapAdminContactSubmissionEndpoints();
 
         return app;
     }
