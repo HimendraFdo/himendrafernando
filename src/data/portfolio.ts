@@ -103,6 +103,10 @@ export const skills: SkillGroup[] = [
     category: "Computer Science",
     skills: ["Data Structures and Algorithms", "Object-Oriented Programming", "Software Engineering Principles"],
   },
+  {
+    category: "Transferable Skills",
+    skills: ["Communication", "Problem-Solving", "Collaboration", "Adaptability", "Time Management"],
+  },
 ];
 
 export const projects: Project[] = [

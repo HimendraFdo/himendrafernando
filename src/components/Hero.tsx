@@ -84,6 +84,7 @@ function Hero({ profile, contact }: HeroProps) {
             ["A+ avg", "Waikato CS"],
             ["Full-stack", "React + TypeScript"],
             ["Data apps", "PostgreSQL + Prisma"],
+            ["Cloud", "AWS + Docker"],
           ].map(([value, label]) => (
             <div key={label}>
               <dt className="text-2xl font-black text-white">{value}</dt>
