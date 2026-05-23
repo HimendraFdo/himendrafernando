@@ -1,10 +1,13 @@
 using System.Security.Claims;
 using System.Threading.RateLimiting;
+using Himendra.Portfolio.Api.Auth;
 using Himendra.Portfolio.Api.Options;
 using Himendra.Portfolio.Api.Security;
 using Himendra.Portfolio.Infrastructure;
 using Himendra.Portfolio.Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Himendra.Portfolio.Api.Extensions;
 
@@ -20,11 +23,36 @@ public static class ServiceCollectionExtensions
     {
         services.Configure<FrontendCorsOptions>(configuration.GetSection(FrontendCorsOptions.SectionName));
         services.Configure<RateLimitingOptions>(configuration.GetSection(RateLimitingOptions.SectionName));
+        services.Configure<AuthOptions>(configuration.GetSection(AuthOptions.SectionName));
 
         services.AddProblemDetails();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddInfrastructure(configuration, environment.IsProduction());
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                var authOptions = configuration
+                    .GetSection(AuthOptions.SectionName)
+                    .Get<AuthOptions>() ?? new AuthOptions();
+
+                options.Authority = string.IsNullOrWhiteSpace(authOptions.Authority) ? null : authOptions.Authority;
+                options.Audience = string.IsNullOrWhiteSpace(authOptions.Audience) ? null : authOptions.Audience;
+                options.RequireHttpsMetadata = authOptions.RequireHttpsMetadata;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "sub",
+                    RoleClaimType = "role"
+                };
+            });
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy(AuthPolicies.AdminOnly, policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireAssertion(context => AuthPolicies.IsAdmin(context.User));
+            });
+        });
 
         services.ConfigureHttpJsonOptions(options =>
         {
