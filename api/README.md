@@ -37,6 +37,45 @@ Defaults:
 
 Override these values with `RateLimiting__GlobalPermitLimit`, `RateLimiting__GlobalWindowSeconds`, `RateLimiting__ContactPermitLimit`, and `RateLimiting__ContactWindowSeconds`.
 
+## Contact API
+
+Submit public portfolio contact messages:
+
+```http
+POST /api/contact
+Content-Type: application/json
+```
+
+```json
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "message": "Hello, I would like to talk about a project."
+}
+```
+
+Successful requests return `201 Created`:
+
+```json
+{
+  "id": "generated-submission-id",
+  "status": "Received",
+  "message": "Thanks for reaching out. I will get back to you soon."
+}
+```
+
+Validation failures return `400 Bad Request` with validation problem details. Public validation rules:
+
+- `name`: required, maximum 120 characters
+- `email`: required, valid email address, maximum 254 characters
+- `message`: required, minimum 10 characters, maximum 4000 characters
+
+Input values are trimmed before validation and storage. Public clients cannot set internal fields such as `id`, `status`, `createdAtUtc`, or `reviewedAtUtc`.
+
+The endpoint uses the stricter `Contact` rate-limit policy. Repeated submissions over the configured limit return `429 Too Many Requests`.
+
+For privacy, the API stores a salted hash of the source IP address rather than the raw IP address. Configure a real production salt with `Security__IpHashSalt`; do not commit salts or secrets.
+
 ## Configuration
 
 Use `appsettings.Development.json` or environment variables for local overrides. Do not commit production secrets. Production secrets should be supplied through environment variables or AWS Secrets Manager.

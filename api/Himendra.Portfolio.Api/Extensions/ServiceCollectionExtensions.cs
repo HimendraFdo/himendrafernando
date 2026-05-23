@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
         services.AddProblemDetails();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-        services.AddInfrastructure(configuration);
+        services.AddInfrastructure(configuration, environment.IsProduction());
 
         services.ConfigureHttpJsonOptions(options =>
         {
