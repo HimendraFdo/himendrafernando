@@ -1,3 +1,4 @@
+using Himendra.Portfolio.Api.Endpoints;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace Himendra.Portfolio.Api.Extensions;
@@ -61,6 +62,8 @@ public static class WebApplicationExtensions
         app.MapHealthChecks("/health/ready")
             .WithName("GetHealthReady")
             .WithOpenApi();
+
+        app.MapContactEndpoints();
 
         return app;
     }
