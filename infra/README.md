@@ -71,11 +71,12 @@ Initialize and review from the dev environment:
 
 ```bash
 cd infra/terraform/environments/dev
-terraform init
-terraform fmt -recursive ../..
+terraform fmt -recursive
+terraform init -backend=false
 terraform validate
-terraform plan
 ```
+
+This validates Terraform syntax and provider configuration only. It does not deploy infrastructure and is not a substitute for reviewing `terraform plan` with real AWS variables, remote state, and deployment credentials configured.
 
 ## AWS Prerequisites
 
@@ -129,7 +130,7 @@ RDS is created with an AWS-managed master password. The API should not use the m
 2. Create the least-privilege PostgreSQL app user and run EF Core migrations.
 3. Store the API connection string and IP hash salt in Secrets Manager.
 4. Set Terraform variables for the secret ARNs, CORS origin, authentication values, and optional ACM certificate.
-5. Run `terraform plan`, review changes, then apply.
+5. Run `terraform init` with the chosen backend, run `terraform plan`, review changes, then apply.
 6. Point the API DNS record at the ALB and enable HTTPS through ACM.
 
 ## GitHub Actions
