@@ -1,0 +1,12 @@
+# Example remote backend for an ongoing real deployment.
+# Copy to backend.tf only after creating the state bucket and lock table.
+
+terraform {
+  backend "s3" {
+    bucket         = "replace-with-terraform-state-bucket"
+    key            = "himendra-portfolio/dev/terraform.tfstate"
+    region         = "ap-southeast-2"
+    dynamodb_table = "replace-with-terraform-lock-table"
+    encrypt        = true
+  }
+}
