@@ -1,0 +1,44 @@
+# Safe example values for the first dev deployment review.
+# Copy to terraform.tfvars locally only after confirming account, budget, and secrets.
+
+aws_region  = "ap-southeast-2"
+environment = "dev"
+
+project_name = "himendra-portfolio"
+
+# HTTP-only dev is supported by leaving certificate_arn empty.
+# Use an ACM certificate ARN only after the domain is confirmed.
+certificate_arn = ""
+
+# Set this to the deployed frontend origin before allowing browser clients.
+cors_allowed_origin = ""
+
+# Admin auth must be supplied by the chosen identity provider.
+auth_authority = ""
+auth_audience  = ""
+
+# Use immutable image tags once the ECR repository exists and an image has been pushed.
+api_image_tag        = "bootstrap"
+api_desired_count    = 1
+api_cpu              = 256
+api_memory           = 512
+api_assign_public_ip = true
+
+# Minimal-cost dev controls. Public ECS tasks avoid NAT Gateway hourly charges.
+enable_nat_gateway = false
+single_nat_gateway = true
+enable_waf         = false
+log_retention_days = 7
+
+# RDS PostgreSQL can fit AWS Free Tier when this account is eligible and usage stays within limits.
+enable_database                = true
+database_name                  = "portfolio"
+database_instance_class        = "db.t4g.micro"
+database_allocated_storage_gb  = 20
+database_backup_retention_days = 7
+database_deletion_protection   = true
+
+# Runtime secrets should be created in AWS Secrets Manager and referenced by ARN.
+# Do not place secret values in this file.
+db_connection_string_secret_arn = ""
+ip_hash_salt_secret_arn         = ""

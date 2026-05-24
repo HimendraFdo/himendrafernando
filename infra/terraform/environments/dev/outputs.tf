@@ -10,11 +10,11 @@ output "api_load_balancer_dns_name" {
 
 output "database_endpoint" {
   description = "Private RDS PostgreSQL endpoint."
-  value       = module.database.database_endpoint
+  value       = try(module.database[0].database_endpoint, null)
 }
 
 output "database_app_credentials_secret_arn" {
   description = "Generated app database credentials secret ARN. Use these to create a least-privilege DB user."
-  value       = module.database.app_credentials_secret_arn
+  value       = try(module.database[0].app_credentials_secret_arn, null)
   sensitive   = true
 }

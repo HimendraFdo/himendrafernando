@@ -19,3 +19,4 @@ variable "db_connection_string_secret_arn" { type = string }
 variable "ip_hash_salt_secret_arn" { type = string }
 variable "log_retention_days" { type = number }
 variable "enable_waf" { type = bool }
+variable "assign_public_ip" { type = bool }

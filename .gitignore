@@ -20,6 +20,11 @@ obj/
 .nuget-packages/
 .appdata/
 **/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+*.tfplan
 
 # Editor directories and files
 .vscode/*

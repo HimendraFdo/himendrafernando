@@ -52,6 +52,12 @@ variable "single_nat_gateway" {
   default     = true
 }
 
+variable "api_assign_public_ip" {
+  description = "Run ECS tasks in the supplied subnets with public IPs. Useful for minimal-cost dev without NAT."
+  type        = bool
+  default     = false
+}
+
 variable "api_container_port" {
   description = "Port exposed by the ASP.NET Core container."
   type        = number
@@ -122,6 +128,12 @@ variable "database_name" {
   description = "Initial PostgreSQL database name."
   type        = string
   default     = "portfolio"
+}
+
+variable "enable_database" {
+  description = "Create the RDS PostgreSQL database. Disable for minimal-cost API-only dev deployments."
+  type        = bool
+  default     = true
 }
 
 variable "database_instance_class" {

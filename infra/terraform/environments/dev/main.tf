@@ -34,6 +34,8 @@ module "security" {
 }
 
 module "database" {
+  count = var.enable_database ? 1 : 0
+
   source = "../../modules/database"
 
   project_name                  = var.project_name
@@ -55,7 +57,7 @@ module "api" {
   aws_region                      = var.aws_region
   vpc_id                          = module.networking.vpc_id
   public_subnet_ids               = module.networking.public_subnet_ids
-  private_subnet_ids              = module.networking.private_subnet_ids
+  private_subnet_ids              = var.api_assign_public_ip ? module.networking.public_subnet_ids : module.networking.private_subnet_ids
   alb_security_group_id           = module.security.alb_security_group_id
   ecs_security_group_id           = module.security.ecs_security_group_id
   api_container_port              = var.api_container_port
@@ -71,4 +73,5 @@ module "api" {
   ip_hash_salt_secret_arn         = var.ip_hash_salt_secret_arn
   log_retention_days              = var.log_retention_days
   enable_waf                      = var.enable_waf
+  assign_public_ip                = var.api_assign_public_ip
 }
