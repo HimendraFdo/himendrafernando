@@ -6,10 +6,35 @@ output "load_balancer_dns_name" {
   value = aws_lb.api.dns_name
 }
 
+output "cloudfront_domain_name" {
+  value = try(aws_cloudfront_distribution.api[0].domain_name, null)
+}
+
+output "ip_hash_salt_secret_arn" {
+  value     = local.effective_ip_hash_secret_arn
+  sensitive = true
+}
+
 output "ecs_cluster_name" {
   value = aws_ecs_cluster.this.name
 }
 
 output "ecs_service_name" {
   value = aws_ecs_service.api.name
+}
+
+output "ecs_task_definition_arn" {
+  value = aws_ecs_task_definition.api.arn
+}
+
+output "ecs_task_subnet_ids" {
+  value = var.private_subnet_ids
+}
+
+output "ecs_task_security_group_id" {
+  value = var.ecs_security_group_id
+}
+
+output "ecs_task_assign_public_ip" {
+  value = var.assign_public_ip
 }

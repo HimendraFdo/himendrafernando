@@ -163,7 +163,7 @@ export const contact: Contact = {
   },
   linkedin: {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/himendra-fernando-aa2aa5313/",
+    href: "https://www.linkedin.com/in/himendra-fernando/",
   },
   resume: {
     label: "Resume",

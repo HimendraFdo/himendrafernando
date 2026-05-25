@@ -11,14 +11,14 @@ project_name = "himendra-portfolio"
 certificate_arn = ""
 
 # Set this to the deployed frontend origin before allowing browser clients.
-cors_allowed_origin = ""
+cors_allowed_origin = "https://himendrafernando.vercel.app"
 
 # Admin auth must be supplied by the chosen identity provider.
 auth_authority = ""
 auth_audience  = ""
 
 # Use immutable image tags once the ECR repository exists and an image has been pushed.
-api_image_tag        = "bootstrap"
+api_image_tag        = "db-init-20260525-3"
 api_desired_count    = 1
 api_cpu              = 256
 api_memory           = 512
@@ -28,6 +28,8 @@ api_assign_public_ip = true
 enable_nat_gateway = false
 single_nat_gateway = true
 enable_waf         = false
+enable_cloudfront_https = true
+create_ip_hash_salt_secret = true
 log_retention_days = 7
 
 # RDS PostgreSQL can fit AWS Free Tier when this account is eligible and usage stays within limits.

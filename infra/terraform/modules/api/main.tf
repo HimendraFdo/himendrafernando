@@ -1,20 +1,58 @@
 locals {
-  name_prefix     = "${var.project_name}-${var.environment}"
-  has_certificate = var.certificate_arn != ""
-  has_db_secret   = var.db_connection_string_secret_arn != ""
-  has_salt_secret = var.ip_hash_salt_secret_arn != ""
-  container_name  = "api"
-  container_image = "${aws_ecr_repository.api.repository_url}:${var.image_tag}"
+  name_prefix                  = "${var.project_name}-${var.environment}"
+  has_certificate              = var.certificate_arn != ""
+  has_db_secret                = var.db_connection_string_secret_arn != ""
+  has_db_app_credentials       = var.db_app_credentials_secret_arn != "" && var.database_host != ""
+  effective_ip_hash_secret_arn = var.ip_hash_salt_secret_arn != "" ? var.ip_hash_salt_secret_arn : try(aws_secretsmanager_secret.ip_hash_salt[0].arn, "")
+  has_salt_secret              = local.effective_ip_hash_secret_arn != ""
+  container_name               = "api"
+  container_image              = "${aws_ecr_repository.api.repository_url}:${var.image_tag}"
+  secret_policy_resources = compact([
+    local.has_db_secret ? var.db_connection_string_secret_arn : "",
+    local.has_db_app_credentials ? var.db_app_credentials_secret_arn : "",
+    local.has_salt_secret ? local.effective_ip_hash_secret_arn : ""
+  ])
   secret_mappings = concat(
     local.has_db_secret ? [{
       name      = "ConnectionStrings__PortfolioDatabase"
       valueFrom = var.db_connection_string_secret_arn
     }] : [],
+    local.has_db_app_credentials ? [
+      {
+        name      = "Database__Username"
+        valueFrom = "${var.db_app_credentials_secret_arn}:username::"
+      },
+      {
+        name      = "Database__Password"
+        valueFrom = "${var.db_app_credentials_secret_arn}:password::"
+      }
+    ] : [],
     local.has_salt_secret ? [{
       name      = "Security__IpHashSalt"
-      valueFrom = var.ip_hash_salt_secret_arn
+      valueFrom = local.effective_ip_hash_secret_arn
     }] : []
   )
+}
+
+resource "random_password" "ip_hash_salt" {
+  count = var.create_ip_hash_salt_secret && var.ip_hash_salt_secret_arn == "" ? 1 : 0
+
+  length  = 64
+  special = true
+}
+
+resource "aws_secretsmanager_secret" "ip_hash_salt" {
+  count = var.create_ip_hash_salt_secret && var.ip_hash_salt_secret_arn == "" ? 1 : 0
+
+  name        = "${local.name_prefix}/security/ip-hash-salt"
+  description = "Salt used by the API to hash source IP addresses."
+}
+
+resource "aws_secretsmanager_secret_version" "ip_hash_salt" {
+  count = var.create_ip_hash_salt_secret && var.ip_hash_salt_secret_arn == "" ? 1 : 0
+
+  secret_id     = aws_secretsmanager_secret.ip_hash_salt[0].id
+  secret_string = random_password.ip_hash_salt[0].result
 }
 
 resource "aws_ecr_repository" "api" {
@@ -61,7 +99,7 @@ resource "aws_iam_role_policy_attachment" "execution" {
 }
 
 resource "aws_iam_role_policy" "secrets" {
-  count = length(local.secret_mappings) > 0 ? 1 : 0
+  count = var.db_connection_string_secret_arn != "" || local.has_db_app_credentials || var.ip_hash_salt_secret_arn != "" || var.create_ip_hash_salt_secret ? 1 : 0
 
   name = "${local.name_prefix}-ecs-secrets"
   role = aws_iam_role.execution.id
@@ -71,7 +109,7 @@ resource "aws_iam_role_policy" "secrets" {
     Statement = [{
       Effect   = "Allow"
       Action   = ["secretsmanager:GetSecretValue"]
-      Resource = [for secret in local.secret_mappings : secret.valueFrom]
+      Resource = local.secret_policy_resources
     }]
   })
 }
@@ -165,6 +203,58 @@ resource "aws_lb_listener" "https" {
   }
 }
 
+resource "aws_cloudfront_distribution" "api" {
+  count = var.enable_cloudfront_https ? 1 : 0
+
+  enabled         = true
+  is_ipv6_enabled = true
+  comment         = "${local.name_prefix} API HTTPS edge"
+  price_class     = "PriceClass_100"
+
+  origin {
+    domain_name = aws_lb.api.dns_name
+    origin_id   = "api-alb"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
+  default_cache_behavior {
+    target_origin_id       = "api-alb"
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+
+    forwarded_values {
+      query_string = true
+      headers      = ["*"]
+
+      cookies {
+        forward = "all"
+      }
+    }
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+    minimum_protocol_version       = "TLSv1.2_2021"
+  }
+}
+
 resource "aws_ecs_task_definition" "api" {
   family                   = "${local.name_prefix}-api"
   requires_compatibilities = ["FARGATE"]
@@ -190,7 +280,12 @@ resource "aws_ecs_task_definition" "api" {
       { name = "Authentication__Authority", value = var.auth_authority },
       { name = "Authentication__Audience", value = var.auth_audience },
       { name = "Authentication__RequireHttpsMetadata", value = "true" },
-      { name = "Cors__AllowedOrigins__0", value = var.cors_allowed_origin }
+      { name = "Cors__AllowedOrigins__0", value = var.cors_allowed_origin },
+      { name = "Database__Host", value = var.database_host },
+      { name = "Database__Port", value = tostring(var.database_port) },
+      { name = "Database__Name", value = var.database_name },
+      { name = "Database__SslMode", value = "Require" },
+      { name = "Database__TrustServerCertificate", value = "true" }
     ]
     secrets = local.secret_mappings
     logConfiguration = {

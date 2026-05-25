@@ -70,8 +70,14 @@ module "api" {
   auth_authority                  = var.auth_authority
   auth_audience                   = var.auth_audience
   db_connection_string_secret_arn = var.db_connection_string_secret_arn
+  db_app_credentials_secret_arn   = try(module.database[0].app_credentials_secret_arn, "")
+  database_host                   = try(module.database[0].database_address, "")
+  database_port                   = try(module.database[0].database_port, 5432)
+  database_name                   = var.database_name
   ip_hash_salt_secret_arn         = var.ip_hash_salt_secret_arn
   log_retention_days              = var.log_retention_days
   enable_waf                      = var.enable_waf
   assign_public_ip                = var.api_assign_public_ip
+  enable_cloudfront_https         = var.enable_cloudfront_https
+  create_ip_hash_salt_secret      = var.create_ip_hash_salt_secret
 }

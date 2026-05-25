@@ -171,3 +171,15 @@ variable "enable_waf" {
   type        = bool
   default     = true
 }
+
+variable "enable_cloudfront_https" {
+  description = "Create a CloudFront distribution that provides HTTPS on the default cloudfront.net domain and forwards to the API ALB."
+  type        = bool
+  default     = false
+}
+
+variable "create_ip_hash_salt_secret" {
+  description = "Create a Secrets Manager value for Security__IpHashSalt when ip_hash_salt_secret_arn is not supplied."
+  type        = bool
+  default     = false
+}
