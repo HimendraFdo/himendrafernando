@@ -2,6 +2,8 @@
 
 A full-stack portfolio website for showcasing Himendra Fernando's software engineering work, technical skills, education, resume, and contact workflow. The project combines a fast React frontend with a production-minded ASP.NET Core backend, PostgreSQL persistence, automated tests, Docker packaging, and Terraform infrastructure for AWS.
 
+<img src="public/Portfolio-Landing-Page.png" width="700" alt="Landing page to the portfolio website"/>
+
 ## ✨ Highlights
 
 - Responsive portfolio UI built with React, TypeScript, Vite, and Tailwind CSS.
