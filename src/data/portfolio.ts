@@ -167,6 +167,6 @@ export const contact: Contact = {
   },
   resume: {
     label: "Resume",
-    href: "/himendra-fernando-cv.pdf",
+    href: "/Himendra-Fernando-CV.pdf",
   },
 };
