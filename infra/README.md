@@ -9,6 +9,7 @@ The selected deployment target is ECS Fargate because it keeps the ASP.NET Core 
 ```text
 Frontend hosting or CloudFront
   -> API domain
+  -> optional CloudFront default HTTPS domain
   -> Application Load Balancer with optional ACM TLS
   -> ECS Fargate tasks running Himendra.Portfolio.Api
   -> RDS PostgreSQL in private subnets
@@ -25,6 +26,7 @@ The Terraform dev environment creates:
 - Security groups limited to ALB -> API and API -> PostgreSQL
 - CloudWatch log group for container logs
 - WAF managed rules, IP reputation protection, and a rate-based rule
+- optional CloudFront distribution that provides HTTPS on a `cloudfront.net` domain without requiring a custom domain
 
 ## Local Docker
 
@@ -85,6 +87,7 @@ Before applying Terraform, configure:
 - AWS account and region access
 - Terraform backend if remote state is required
 - ACM certificate ARN for HTTPS, or leave `certificate_arn` empty for HTTP-only dev testing
+- `enable_cloudfront_https = true` when using CloudFront's default HTTPS domain instead of a custom API domain
 - Frontend origin for CORS
 - JWT authority and audience for admin endpoints
 - Secrets Manager values for the API database connection string and IP hash salt
@@ -100,6 +103,11 @@ ASPNETCORE_ENVIRONMENT=Production
 ASPNETCORE_URLS=http://+:8080
 ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
 ConnectionStrings__PortfolioDatabase
+Database__Host
+Database__Port
+Database__Name
+Database__Username
+Database__Password
 Authentication__Authority
 Authentication__Audience
 Authentication__RequireHttpsMetadata=true
@@ -107,12 +115,32 @@ Security__IpHashSalt
 Cors__AllowedOrigins__0
 ```
 
+`ConnectionStrings__PortfolioDatabase` is optional when the `Database__*` settings are supplied. The ECS task uses the generated `portfolio_app` credentials from Secrets Manager and builds the runtime PostgreSQL connection string in the application.
+
 Terraform passes non-secret values as ECS environment variables and reads secret values from Secrets Manager when these ARNs are supplied:
 
 ```text
 db_connection_string_secret_arn
 ip_hash_salt_secret_arn
 ```
+
+If `create_ip_hash_salt_secret = true` and `ip_hash_salt_secret_arn` is empty, Terraform creates a generated Secrets Manager value for `Security__IpHashSalt` and grants the ECS task permission to read it.
+
+## Database Migrations
+
+The API image supports a one-off migration command:
+
+```bash
+dotnet Himendra.Portfolio.Api.dll --migrate-database
+```
+
+In ECS, run the current API task definition with a container command override:
+
+```bash
+--overrides '{"containerOverrides":[{"name":"api","command":["--migrate-database"]}]}'
+```
+
+Use an admin `ConnectionStrings__PortfolioDatabase` value for the migration task. The command creates or updates the `portfolio_app` role from the generated app credentials, then applies EF Core migrations. Normal API runtime should use the generated `portfolio_app` credentials, not the RDS master user.
 
 ## Secrets Manager
 
@@ -131,7 +159,7 @@ RDS is created with an AWS-managed master password. The API should not use the m
 3. Store the API connection string and IP hash salt in Secrets Manager.
 4. Set Terraform variables for the secret ARNs, CORS origin, authentication values, and optional ACM certificate.
 5. Run `terraform init` with the chosen backend, run `terraform plan`, review changes, then apply.
-6. Point the API DNS record at the ALB and enable HTTPS through ACM.
+6. Point the API DNS record at the ALB and enable HTTPS through ACM, or enable CloudFront for a default HTTPS endpoint without a custom domain.
 
 ## GitHub Actions
 

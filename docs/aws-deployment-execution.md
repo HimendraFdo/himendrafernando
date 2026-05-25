@@ -23,6 +23,8 @@ This document captures the review-first deployment path and execution record for
 - ECS service: active, 1 desired task, 1 running task, steady state reached
 - ALB target health: healthy
 - Health endpoint: `http://himendra-portfolio-dev-api-alb-88743127.ap-southeast-2.elb.amazonaws.com/health` returned `200`
+- Frontend deployment: `https://himendrafernando.vercel.app`
+- API HTTPS endpoint: `https://d1umr1i0snrouw.cloudfront.net/health` returned `200`
 - Final Terraform drift check: no changes
 
 ## Required Preflight Values
@@ -83,6 +85,7 @@ Required deployment values:
 - `database_deletion_protection`
 - `db_connection_string_secret_arn`
 - `ip_hash_salt_secret_arn`
+- `create_ip_hash_salt_secret`
 - `auth_authority`
 - `auth_audience`
 
@@ -215,13 +218,30 @@ Live outputs:
 - API image tag: `bootstrap`
 - API load balancer: `himendra-portfolio-dev-api-alb-88743127.ap-southeast-2.elb.amazonaws.com`
 - Health endpoint: `http://himendra-portfolio-dev-api-alb-88743127.ap-southeast-2.elb.amazonaws.com/health`
+- API CloudFront HTTPS endpoint: `https://d1umr1i0snrouw.cloudfront.net`
+- Frontend Vercel endpoint: `https://himendrafernando.vercel.app`
 - Database endpoint: `himendra-portfolio-dev-postgres.c5o26mck8nj3.ap-southeast-2.rds.amazonaws.com:5432`
 
 Remaining application setup:
 
-- The RDS instance exists, but the API task is not yet configured with a `ConnectionStrings__PortfolioDatabase` secret.
-- Database-backed contact/admin workflows require creating the least-privilege database user, running migrations, storing the final connection string in Secrets Manager, and updating `db_connection_string_secret_arn`.
+- The API can build its runtime database connection from the private RDS endpoint plus generated `portfolio_app` credentials stored in Secrets Manager.
+- The API supports a one-off `--migrate-database` command that creates/updates the `portfolio_app` role when run with an admin connection string, then applies EF Core migrations.
+- Database-backed contact/admin workflows require building and deploying an API image that includes the migration command, applying Terraform, then running one ECS migration task.
+- The API can create and consume a generated `Security__IpHashSalt` secret when `create_ip_hash_salt_secret = true`; apply Terraform after reviewing the plan to enable it.
 - Admin authentication values are still empty until a real identity provider is configured.
+
+One-off migration command shape:
+
+```bash
+aws ecs run-task \
+  --cluster <api_ecs_cluster_name> \
+  --task-definition <api_ecs_task_definition_arn> \
+  --launch-type FARGATE \
+  --network-configuration '<awsvpcConfiguration using api_ecs_task_subnet_ids, api_ecs_task_security_group_id, and api_ecs_task_assign_public_ip>' \
+  --overrides '{"containerOverrides":[{"name":"api","command":["--migrate-database"]}]}'
+```
+
+Run this only after the API task definition has database credentials available and an admin `ConnectionStrings__PortfolioDatabase` value is supplied for the migration task.
 
 ## Future User Approval
 

@@ -15,7 +15,7 @@ resource "aws_secretsmanager_secret" "app_credentials" {
 resource "aws_secretsmanager_secret_version" "app_credentials" {
   secret_id = aws_secretsmanager_secret.app_credentials.id
   secret_string = jsonencode({
-    username = "${replace(var.project_name, "-", "_")}_${var.environment}_api"
+    username = "portfolio_app"
     password = random_password.app_user.result
     database = var.database_name
   })
