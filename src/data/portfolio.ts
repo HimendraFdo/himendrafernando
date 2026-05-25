@@ -64,7 +64,7 @@ export const profile: Profile = {
   email: "fernandohimendra@gmail.com",
   summary:
     "Computer Science student at the University of Waikato with an A+ average and hands-on full-stack development experience building React, Next.js, TypeScript, Python, Java, Prisma, and PostgreSQL applications.",
-  resumeUrl: "/himendra-fernando-cv.pdf",
+  resumeUrl: "/Himendra-Fernando-CV.pdf",
 };
 
 export const about: About = {
