@@ -62,6 +62,11 @@ function DashboardPlaceholder() {
 function FeaturedProject({ project }: FeaturedProjectProps) {
   const githubHref = isUsableHref(project.githubUrl) ? project.githubUrl : undefined
   const liveHref = isUsableHref(project.liveUrl) ? project.liveUrl : undefined
+  const projectImages = project.images?.length
+    ? project.images
+    : project.image
+      ? [{ src: project.image, alt: `${project.title} dashboard screenshot` }]
+      : []
 
   return (
     <article className="overflow-hidden rounded-lg border border-white/10 bg-[#101620] shadow-2xl shadow-black/20 lg:grid lg:grid-cols-[0.95fr_1.05fr]">
@@ -174,13 +179,21 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
       </div>
 
       <div className="bg-[#080b11] p-4 sm:p-6 lg:p-8">
-        {project.image ? (
-          <div className="overflow-hidden rounded-lg border border-white/10 bg-slate-950 shadow-2xl shadow-black/30">
-            <img
-              alt={`${project.title} dashboard screenshot`}
-              className="h-full min-h-[18rem] w-full object-cover object-left-top opacity-95 transition duration-500 hover:scale-[1.015]"
-              src={project.image}
-            />
+        {projectImages.length ? (
+          <div className="grid gap-4">
+            {projectImages.map((image, index) => (
+              <figure
+                className="overflow-hidden rounded-lg border border-white/10 bg-slate-950 shadow-2xl shadow-black/30"
+                key={image.src}
+              >
+                <img
+                  alt={image.alt}
+                  className="aspect-video w-full object-cover object-left-top opacity-95 transition duration-500 hover:scale-[1.015]"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  src={image.src}
+                />
+              </figure>
+            ))}
           </div>
         ) : (
           <DashboardPlaceholder />
