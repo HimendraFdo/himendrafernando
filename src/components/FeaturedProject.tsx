@@ -1,4 +1,4 @@
-import { Code2, ExternalLink } from "lucide-react"
+import { Code2, ExternalLink, Layers3, ShieldCheck } from "lucide-react"
 import type { Project } from "../data/portfolio"
 
 type FeaturedProjectProps = {
@@ -97,6 +97,39 @@ function FeaturedProject({ project }: FeaturedProjectProps) {
               </li>
             ))}
           </ul>
+        ) : null}
+
+        {project.engineeringDetails?.length ? (
+          <section
+            aria-labelledby={`${project.slug}-engineering-title`}
+            className="border-t border-white/10 px-6 py-7 sm:px-8"
+          >
+            <div className="flex items-start gap-3">
+              <Layers3 aria-hidden="true" className="mt-0.5 shrink-0 text-cyan-200" size={19} />
+              <div>
+                <h4
+                  className="font-mono text-sm font-bold uppercase tracking-[0.14em] text-cyan-200"
+                  id={`${project.slug}-engineering-title`}
+                >
+                  Engineering depth
+                </h4>
+                <p className="mt-2 text-sm leading-6 text-slate-400">
+                  Production-minded design decisions behind the dashboard.
+                </p>
+              </div>
+            </div>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {project.engineeringDetails.map((detail) => (
+                <li className="rounded-md border border-white/10 bg-white/[0.035] p-4" key={detail.title}>
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck aria-hidden="true" className="shrink-0 text-cyan-300" size={16} />
+                    <h5 className="text-sm font-bold text-white">{detail.title}</h5>
+                  </div>
+                  <p className="mt-2 text-xs leading-5 text-slate-400">{detail.description}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
         ) : null}
 
         <ul className="flex flex-wrap gap-2 border-y border-white/10 px-6 py-5 sm:px-8" aria-label="Technology stack">
