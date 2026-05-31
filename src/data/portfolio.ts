@@ -31,6 +31,10 @@ export type Project = {
   liveUrl?: string;
   image?: string;
   highlights: string[];
+  engineeringDetails?: {
+    title: string;
+    description: string;
+  }[];
   featured: boolean;
 };
 
@@ -93,11 +97,11 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Backend and Data",
-    skills: ["Prisma", "PostgreSQL", "Neon", "API Routes", "CRUD Workflows", "Zod"],
+    skills: ["Prisma", "PostgreSQL", "Neon", "REST APIs", "CRUD Workflows", "Zod", "Row Level Security"],
   },
   {
     category: "Testing and Tools",
-    skills: ["Git", "Vitest", "Vercel", "Unit Testing", "Data Visualization", "Recharts"],
+    skills: ["Git", "Vitest", "GitHub Actions", "Vercel", "Upstash Redis", "Data Visualization", "Recharts"],
   },
   {
     category: "Computer Science",
@@ -114,30 +118,55 @@ export const projects: Project[] = [
     title: "Personal Analytics Dashboard",
     slug: "personal-analytics-dashboard",
     description:
-      "A personal analytics dashboard for tracking entries, reviewing trends, and presenting personal data clearly.",
+      "An authenticated, mobile-responsive personal analytics dashboard for logging time, spending, and nutrition data.",
     longDescription:
-      "Built as a practical dashboard project to demonstrate data visualization, structured tracking workflows, and clean information display across study, finance, health, and personal entries.",
+      "Migrated from a React and Vite frontend with browser-only storage into a production-style Next.js application backed by PostgreSQL. The result combines owner-scoped data, typed REST APIs, responsive analytics, and defence-in-depth security.",
     techStack: [
-      "Next.js",
-      "React",
+      "Next.js 15",
+      "React 19",
       "TypeScript",
-      "Tailwind CSS",
+      "Tailwind CSS 4",
       "Clerk",
       "Prisma",
       "PostgreSQL",
       "Neon",
       "Zod",
+      "Upstash Redis",
+      "Open Food Facts",
       "Recharts",
       "Vitest",
+      "GitHub Actions",
       "Vercel",
     ],
     githubUrl: "https://github.com/HimendraFdo/personal-analytics-dashboard",
-    liveUrl: undefined,
+    liveUrl: "https://personalanalyticsdashboard.vercel.app",
     image: personalAnalyticsDashboardImage,
     highlights: [
-      "Implemented validated CRUD workflows using TypeScript, Zod, and Prisma to support reliable data entry and database-backed records.",
-      "Created filtered history views, summary cards, and Recharts visualizations to help users review activity patterns and personal metrics.",
-      "Developed reusable React components with Tailwind CSS and added Vitest coverage for key utility and validation logic.",
+      "Built configuration-driven time, money, and nutrition workspaces with filtered records, summary cards, responsive Recharts visualisations, and Open Food Facts-powered macro tracking.",
+      "Designed multi-tenant isolation with Clerk authentication, API ownership filters, PostgreSQL row level security, transaction-local user context, and least-privilege database roles.",
+      "Automated production checks with Vitest regression coverage, opt-in PostgreSQL RLS integration tests, GitHub Actions CI, and migration-aware Vercel deployments backed by Neon.",
+    ],
+    engineeringDetails: [
+      {
+        title: "Layered architecture",
+        description:
+          "Separated reusable UI, shared state, validated route handlers, Prisma data access, and durable PostgreSQL persistence.",
+      },
+      {
+        title: "Defence in depth",
+        description:
+          "Enforced owner checks in the API and RLS policies in PostgreSQL so user records remain isolated at two layers.",
+      },
+      {
+        title: "Hardened APIs",
+        description:
+          "Added Zod validation, same-origin mutation checks, JSON body limits, security headers, and route-specific rate limits.",
+      },
+      {
+        title: "Production delivery",
+        description:
+          "Used Upstash Redis counters, Neon runtime and migration URLs, regression tests, CI checks, and Vercel deployment builds.",
+      },
     ],
     featured: true,
   },
