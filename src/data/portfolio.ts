@@ -1,4 +1,6 @@
-import personalAnalyticsDashboardImage from "../assets/personal-analytics-dashboard.png";
+import analyticsImage from "../assets/Analytics.png";
+import dashboardImage from "../assets/Dashboard.png";
+import entriesImage from "../assets/Entries.png";
 
 export type Profile = {
   name: string;
@@ -30,6 +32,10 @@ export type Project = {
   githubUrl: string;
   liveUrl?: string;
   image?: string;
+  images?: {
+    src: string;
+    alt: string;
+  }[];
   highlights: string[];
   engineeringDetails?: {
     title: string;
@@ -68,7 +74,7 @@ export const profile: Profile = {
   email: "fernandohimendra@gmail.com",
   summary:
     "Computer Science student at the University of Waikato with an A+ average and hands-on full-stack development experience building React, Next.js, TypeScript, Python, Java, Prisma, and PostgreSQL applications.",
-  resumeUrl: "/Himendra-Fernando-CV.pdf",
+  resumeUrl: "/Himendra Fernando CV.pdf",
 };
 
 export const about: About = {
@@ -140,7 +146,21 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/HimendraFdo/personal-analytics-dashboard",
     liveUrl: "https://personalanalyticsdashboard.vercel.app",
-    image: personalAnalyticsDashboardImage,
+    image: dashboardImage,
+    images: [
+      {
+        src: dashboardImage,
+        alt: "Time tracking dashboard overview",
+      },
+      {
+        src: entriesImage,
+        alt: "Money tracking entries workspace",
+      },
+      {
+        src: analyticsImage,
+        alt: "Nutrition analytics workspace",
+      },
+    ],
     highlights: [
       "Built configuration-driven time, money, and nutrition workspaces with filtered records, summary cards, responsive Recharts visualisations, and Open Food Facts-powered macro tracking.",
       "Designed multi-tenant isolation with Clerk authentication, API ownership filters, PostgreSQL row level security, transaction-local user context, and least-privilege database roles.",
@@ -196,6 +216,6 @@ export const contact: Contact = {
   },
   resume: {
     label: "Resume",
-    href: "/Himendra-Fernando-CV.pdf",
+    href: "/Himendra Fernando CV.pdf",
   },
 };
