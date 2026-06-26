@@ -1,6 +1,8 @@
 import analyticsImage from "../assets/Analytics.png";
 import dashboardImage from "../assets/Dashboard.png";
 import entriesImage from "../assets/Entries.png";
+import dumplingGalleryImage from "../assets/mywifesdumplings-gallery.png";
+import dumplingLogoImage from "../assets/mywifesdumplings-logo.png";
 
 export type Profile = {
   name: string;
@@ -189,6 +191,71 @@ export const projects: Project[] = [
       },
     ],
     featured: true,
+  },
+  {
+    title: "My Wife's Dumplings",
+    slug: "mywifesdumplings",
+    description:
+      "Full-stack e-commerce and online ordering platform for a handmade dumpling business in Auckland, New Zealand.",
+    longDescription:
+      "Built a production-grade ordering system with Next.js 14 and an ASP.NET Core 8 backend. Covers guest and authenticated checkout via Stripe, JWT-based customer accounts, an admin fulfilment dashboard, Sanity CMS-driven marketing pages, and Resend transactional emails.",
+    techStack: [
+      "Next.js 14",
+      "React 18",
+      "TypeScript",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Framer Motion",
+      "ASP.NET Core 8",
+      "Entity Framework Core",
+      "SQL Server",
+      "Stripe",
+      "Sanity CMS",
+      "Resend",
+      "Azure App Service",
+      "Vercel",
+    ],
+    githubUrl: "https://github.com/HimendraFdo/mywifesdumplings",
+    liveUrl: "https://my-wifes-dumplings.vercel.app",
+    image: dumplingGalleryImage,
+    images: [
+      {
+        src: dumplingLogoImage,
+        alt: "My Wife's Dumplings logo",
+      },
+      {
+        src: dumplingGalleryImage,
+        alt: "My Wife's Dumplings gallery page",
+      },
+    ],
+    highlights: [
+      "Stripe PaymentIntents checkout for guest and registered customers with server-side price enforcement so the browser never controls order totals.",
+      "ASP.NET Core Identity with JWT bearer authentication, role-based authorisation, and a secure guest order-lookup link flow.",
+      "Sanity CMS-backed marketing pages, Resend order confirmation emails, Azure Key Vault production secrets, and Vercel Speed Insights.",
+    ],
+    engineeringDetails: [
+      {
+        title: "Server-side pricing",
+        description:
+          "Menu prices are fetched from Sanity on the server; the client never sends totals, preventing price manipulation.",
+      },
+      {
+        title: "Layered auth",
+        description:
+          "ASP.NET Core Identity + JWT for accounts, Stripe webhooks as payment source of truth, and secure guest lookup tokens.",
+      },
+      {
+        title: "Full-stack deployment",
+        description:
+          "Next.js frontend on Vercel, .NET API on Azure App Service, secrets in Azure Key Vault via managed identity.",
+      },
+      {
+        title: "Content-driven UI",
+        description:
+          "Menu, gallery, and about content managed through Sanity Studio with ISR revalidation on content change webhooks.",
+      },
+    ],
+    featured: false,
   },
 ];
 
