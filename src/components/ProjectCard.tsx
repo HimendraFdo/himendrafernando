@@ -13,70 +13,68 @@ function ProjectCard({ project }: ProjectCardProps) {
   const liveHref = isUsableHref(project.liveUrl) ? project.liveUrl : undefined
 
   return (
-    <article className="flex h-full flex-col rounded-lg border border-white/10 bg-[#101620] p-5 transition hover:-translate-y-1 hover:border-cyan-200/40 sm:p-6">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101620] shadow-lg shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-cyan-200/30 hover:shadow-cyan-900/20">
       {project.image ? (
-        <img
-          alt={`${project.title} screenshot`}
-          className="mb-5 aspect-video w-full rounded-md border border-white/10 bg-slate-950 object-cover"
-          src={project.image}
-        />
-      ) : null}
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-400">
-            {project.description}
-          </p>
+        <div className="relative overflow-hidden">
+          <img
+            alt={`${project.title} screenshot`}
+            className="aspect-video w-full bg-slate-950 object-cover object-top transition duration-500 group-hover:scale-[1.04]"
+            loading="lazy"
+            src={project.image}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#101620]/80 via-transparent to-transparent" aria-hidden="true" />
         </div>
-      </div>
-      <p className="mt-5 text-sm leading-6 text-slate-300">
-        {project.longDescription}
-      </p>
-      <ul className="mt-5 flex flex-wrap gap-2">
-        {project.techStack.map((tech) => (
-          <li className="rounded border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300" key={tech}>
-            {tech}
-          </li>
-        ))}
-      </ul>
-      {project.highlights.length > 0 ? (
-        <ul className="mt-5 space-y-2 text-sm leading-6 text-slate-400">
-          {project.highlights.map((highlight) => (
-            <li className="flex gap-2" key={highlight}>
-              <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-cyan-300" />
-              <span>{highlight}</span>
+      ) : null}
+
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-lg font-bold text-white">{project.title}</h3>
+        <p className="mt-2 text-sm leading-6 text-slate-400">{project.description}</p>
+
+        <ul className="mt-4 flex flex-wrap gap-1.5">
+          {project.techStack.slice(0, 6).map((tech) => (
+            <li
+              className="rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300"
+              key={tech}
+            >
+              {tech}
             </li>
           ))}
+          {project.techStack.length > 6 ? (
+            <li className="rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-500">
+              +{project.techStack.length - 6} more
+            </li>
+          ) : null}
         </ul>
-      ) : null}
-      {(githubHref || liveHref) ? (
-        <div className="mt-auto flex flex-wrap gap-3 pt-6">
-          {githubHref ? (
-            <a
-              aria-label={`View ${project.title} source code on GitHub`}
-              className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/14 bg-white/6 px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-cyan-200/50 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-[#101620]"
-              href={githubHref}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <Code2 aria-hidden="true" size={16} />
-              GitHub
-            </a>
-          ) : null}
-          {liveHref ? (
-            <a
-              aria-label={`Open live demo for ${project.title}`}
-              className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/14 bg-white/6 px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-cyan-200/50 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-[#101620]"
-              href={liveHref}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <ExternalLink aria-hidden="true" size={16} />
-              Live demo
-            </a>
-          ) : null}
-        </div>
-      ) : null}
+
+        {(githubHref || liveHref) ? (
+          <div className="mt-auto flex flex-wrap gap-2.5 pt-5">
+            {githubHref ? (
+              <a
+                aria-label={`View ${project.title} source code on GitHub`}
+                className="inline-flex min-h-10 items-center gap-2 rounded-md border border-white/14 bg-white/6 px-3 py-2 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:border-cyan-200/50 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-[#101620]"
+                href={githubHref}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Code2 aria-hidden="true" size={14} />
+                GitHub
+              </a>
+            ) : null}
+            {liveHref ? (
+              <a
+                aria-label={`Open live demo for ${project.title}`}
+                className="inline-flex min-h-10 items-center gap-2 rounded-md bg-cyan-300/10 px-3 py-2 text-xs font-semibold text-cyan-200 ring-1 ring-cyan-300/30 transition hover:-translate-y-0.5 hover:bg-cyan-300/20 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-[#101620]"
+                href={liveHref}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <ExternalLink aria-hidden="true" size={14} />
+                Live demo
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
     </article>
   )
 }
